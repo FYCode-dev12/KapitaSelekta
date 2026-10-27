@@ -231,7 +231,91 @@ Untuk perubahan database pada project Supabase:
 
 MCP Supabase dapat digunakan untuk memeriksa tabel, migration, dan status project. Operasi SQL yang mengubah data harus diperiksa ulang sebelum dijalankan.
 
-## 12. Checklist Fitur Selesai
+## 12. Menghubungkan MCP Supabase dengan PAT dan Project Ref
+
+Bagian ini digunakan jika coding agent sudah memiliki kemampuan MCP dan konfigurasi MCP dikelola lewat prompt. Contoh di bawah menggunakan Hermes Agent, tetapi alurnya dapat diadaptasi ke agent lain yang mendukung remote MCP HTTP dan custom header.
+
+### Data yang diperlukan
+
+Siapkan dua nilai berikut:
+
+- **PAT Supabase** — Personal Access Token dari halaman Access Tokens Supabase.
+- **Project Ref** — ID project Supabase, biasanya terlihat di URL dashboard atau pengaturan project.
+
+PAT adalah credential rahasia. Jangan commit ke Git, jangan memasukkannya ke file proyek, dan jangan menuliskannya di prompt biasa yang tersimpan di riwayat percakapan.
+
+### Prompt untuk agent
+
+Kirim prompt berikut kepada coding agent yang Anda gunakan:
+
+```text
+Konfigurasikan MCP Supabase menggunakan PAT dan Project Ref.
+
+Gunakan server remote HTTP:
+https://mcp.supabase.com/mcp?project_ref=PROJECT_REF_SAYA
+
+Atur header:
+Authorization: Bearer PAT_SUPABASE_SAYA
+
+Jangan tampilkan PAT di output, log, diff, atau commit.
+Simpan credential menggunakan mekanisme secret atau environment variable milik agent.
+Setelah konfigurasi, uji koneksi MCP dan laporkan hanya status koneksi,
+jumlah tools yang ditemukan, serta nama tools tanpa membocorkan credential.
+```
+
+Agent seharusnya meminta PAT melalui input rahasia atau mengambilnya dari environment secret. Jika agent meminta menulis PAT ke file `.env`, pastikan file tersebut hanya berada di luar repository atau sudah masuk `.gitignore`.
+
+### Konfigurasi Hermes Agent melalui prompt
+
+Untuk Hermes, prompt yang lebih spesifik:
+
+```text
+Tambahkan server MCP bernama supabase menggunakan endpoint:
+https://mcp.supabase.com/mcp?project_ref=PROJECT_REF_SAYA
+
+Gunakan autentikasi header dengan PAT Supabase yang saya berikan melalui
+input rahasia. Jangan mencetak atau menyimpan PAT di repository.
+Gunakan full access karena PAT ini memang memiliki izin penuh.
+Setelah itu jalankan verifikasi koneksi MCP dan tampilkan jumlah tools.
+```
+
+Jika agent meminta persetujuan konfigurasi, jawab bahwa server perlu diaktifkan dan semua tools yang memang diperlukan boleh didaftarkan. Untuk pekerjaan production, lebih aman memakai `read_only=true` dan membatasi feature group terlebih dahulu.
+
+### Cara memverifikasi
+
+Minta agent menjalankan verifikasi berikut:
+
+```text
+Verifikasi koneksi MCP Supabase sekarang. Tampilkan:
+1. nama server;
+2. endpoint tanpa PAT;
+3. status koneksi;
+4. jumlah tools yang ditemukan;
+5. daftar nama tools.
+Jangan tampilkan token atau header Authorization.
+```
+
+Koneksi dianggap berhasil jika agent melaporkan status connected dan tools Supabase berhasil ditemukan. Pada Hermes, konfigurasi dapat diperiksa dengan:
+
+```bash
+hermes mcp list
+hermes mcp test supabase
+```
+
+### Full access dan keamanan
+
+Full access berarti agent dapat melakukan operasi perubahan pada project, bukan hanya membaca data. Dengan PAT full access, agent berpotensi menjalankan SQL, migration, mengubah project, dan melakukan operasi lain sesuai izin PAT.
+
+Gunakan aturan berikut:
+
+- Minta agent menampilkan rencana sebelum menjalankan SQL atau migration.
+- Review target project dan query sebelum menyetujui operasi tulis.
+- Gunakan project-scoped URL jika hanya satu project yang dibutuhkan.
+- Gunakan mode read-only untuk eksplorasi awal atau pekerjaan otomatis.
+- Cabut dan buat ulang PAT jika token pernah tercetak di log, chat, screenshot, atau commit.
+- Jangan memasukkan PAT ke `README`, source code, `.env.example`, issue, atau pull request.
+
+## 13. Checklist Fitur Selesai
 
 Sebuah fitur dianggap selesai jika:
 
