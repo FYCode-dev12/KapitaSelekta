@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontak Kami — SDN 3 Way Galih</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-contact">
+        <span>&#9742; (0721) 123456</span>
+        <span>&#9993; info@sdn3waygalih.sch.id</span>
+      </div>
+      <a href="ppdb.html" class="btn btn-gold btn-sm">PPDB 2026</a>
+    </div>
+  </div>
+
+  <header class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-logo">SWG</div>
+        <div class="brand-text"><strong>SDN 3 WAY GALIH</strong><small>Sekolah Dasar Negeri</small></div>
+      </a>
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="profil.html" class="nav-link">Profil</a>
+        <a href="program.html" class="nav-link">Program</a>
+        <a href="berita.html" class="nav-link">Berita</a>
+        <a href="galeri.html" class="nav-link">Galeri</a>
+        <a href="ppdb.html" class="nav-link">PPDB</a>
+        <a href="kontak.html" class="nav-link active">Kontak</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Buka menu navigasi" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Kontak Kami</h1>
+      <p class="breadcrumb"><a href="index.html">Beranda</a> / Kontak</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="reveal">
+        <div class="contact-cards">
+          <div class="contact-card"><span class="cc-icon">&#128205;</span><strong>Alamat</strong><p>Jl. Pendidikan No. 3, Way Galih, Tanjung Bintang, Lampung Selatan</p></div>
+          <div class="contact-card"><span class="cc-icon">&#9742;</span><strong>Telepon</strong><p>(0721) 123456</p></div>
+          <div class="contact-card"><span class="cc-icon">&#9993;</span><strong>Email</strong><p>info@sdn3waygalih.sch.id</p></div>
+          <div class="contact-card"><span class="cc-icon">&#128337;</span><strong>Jam Layanan</strong><p>Senin – Jumat<br>07.00 – 15.00 WIB</p></div>
+        </div>
+        <div class="map-placeholder"><span>Peta Lokasi Sekolah</span></div>
+      </div>
+      <div class="contact-form reveal">
+        <h3>Kirim Pesan</h3>
+        <div class="form-success" id="formSuccess">Pesan Anda berhasil dikirim. Terima kasih telah menghubungi kami!</div>
+        <form id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" placeholder="Nama Anda" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="email@contoh.com" required>
+          </div>
+          <div class="form-group">
+            <label for="subjek">Subjek</label>
+            <input type="text" id="subjek" name="subjek" placeholder="Perihal pesan">
+          </div>
+          <div class="form-group">
+            <label for="pesan">Pesan</label>
+            <textarea id="pesan" name="pesan" placeholder="Tulis pesan Anda di sini..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width: 100%;">Kirim Pesan</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner reveal-group">
+      <div class="footer-col reveal">
+        <div class="brand">
+          <div class="brand-logo">SWG</div>
+          <div class="brand-text"><strong>SDN 3 WAY GALIH</strong><small>Sekolah Dasar Negeri</small></div>
+        </div>
+        <p>Mewujudkan peserta didik yang cerdas, berkarakter, dan berakhlak mulia.</p>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Tautan Cepat</h4>
+        <a href="profil.html">Profil Sekolah</a>
+        <a href="berita.html">Berita</a>
+        <a href="ppdb.html">PPDB</a>
+        <a href="galeri.html">Galeri</a>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Kontak</h4>
+        <p>Jl. Pendidikan No. 3, Way Galih<br>Kec. Tanjung Bintang, Lampung Selatan</p>
+        <p>(0721) 123456<br>info@sdn3waygalih.sch.id</p>
+        <p>Senin – Jumat, 07.00 – 15.00 WIB</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">&copy; 2026 SDN 3 Way Galih. Seluruh hak cipta dilindungi.</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">&#8593;</button>
+  <script src="script.js"></script>
+</body>
+</html>
